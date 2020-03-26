@@ -9,8 +9,8 @@ block content
     br
 
     #proj.container.jumbotron
-        h3= 'Current Projects'
-        #projlist
+        h3= 'Current Schemas'
+        #projlist.container
         br
         .form-inline.my-2.my-lg-0    
             button#createproj.btn.btn-outline-info.mr-sm-2 Create
@@ -18,9 +18,8 @@ block content
                 input.btn.btn-outline-success(type = 'submit' value = 'Use')
 
     #projform.container.jumbotron.invisible
-        h3= 'Create a Project'
-        h6= 'A Project is a Direct Mapping of Your MySQL Schema'
-        h6= 'Enter Your Database Credentials Below'
+        h3= 'Map Your Data Schema'
+        h6= 'Enter the Credentials Below for your Presto Cluster'
         form.form-group(action = '/create', method = 'post')
             label.col-form-label(for = 'hostname') Database Host:
             input.form-control(type = 'text', placeholder = 'http://' name='hostname')

@@ -2,13 +2,24 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel = 'stylesheet', href = '/stylesheets/bootstrap.css')
+    link(rel = 'stylesheet', href = '/stylesheets/style.css')
     block scripts
   body
     block navbar
-      .navbar.navbar-expand-sm.navbar-dark.bg-dark.justify-content-between
+      .navbar.navbar-expand-sm.navbar-light.bg-light.justify-content-between
         .navbar-brand Scheme
+          img#logo.ml-2.logoimg(src = '/images/lightbulblogo.svg') 
         nav.navbar-nav.justify-content-end
           li.nav-item
             a.nav-link(href='/') Projects
+              img#projlogo.ml-2.logoimg(src = '/images/databaselogo.svg')
     block content
+    block foot
+      #footer
+        p Created by Sir Gallo
+
+        #iconref Icon made by 
+          a(href = 'https://www.flaticon.com/authors/good-ware', title = 'Good Ware') Good Ware
+
+

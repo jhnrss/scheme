@@ -13,10 +13,11 @@ router.get('/', function(req, res, next) {
 router.post('/create', function(req, res, next) {
   let formData = req.body
   console.log('form data', formData)
+  res.render('project')
 })
 
 router.post('/use', function(req, res, next) {
-  res.render('query')
+  res.redirect('/query')
 })
 
 module.exports = router

@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('query')
 })
 
-router.post('/query', function(req, res, next) {
+router.post('/', function(req, res, next) {
   console.log('made it')
 })
 
