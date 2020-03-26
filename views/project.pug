@@ -10,6 +10,7 @@ block content
 
     #proj.container.jumbotron
         h3= 'Current Schemas'
+        h5= 'Select a Schema to Query On'
         #projlist.container
         br
         .form-inline.my-2.my-lg-0    
@@ -19,18 +20,16 @@ block content
 
     #projform.container.jumbotron.invisible
         h3= 'Map Your Data Schema'
-        h6= 'Enter the Credentials Below for your Presto Cluster'
+        h5= 'Enter the Credentials Below for your Presto Cluster'
         form.form-group(action = '/create', method = 'post')
-            label.col-form-label(for = 'hostname') Database Host:
+            label.col-form-label(for = 'hostname') Cluster Host:
             input.form-control(type = 'text', placeholder = 'http://' name='hostname')
-            label.col-form-label(for = 'database') Database Name:
-            input.form-control(type = 'text', placeholder = 'information_db' name = 'database')
-            label.col-form-label(for = 'port') Database Port:
-            input.form-control(type = 'text', placeholder = '3306', name = 'port')
+            label.col-form-label(for = 'catalog') Catalog Name:
+            input.form-control(type = 'text', placeholder = 'tpch' name = 'catalog')
+            label.col-form-label(for = 'schema') Schema Name:
+            input.form-control(type = 'text', placeholder = 'sf1' name = 'schema')
             label.col-form-label(for = 'user') User:
             input.form-control(type = 'text', placeholder = 'root', name = 'user')
-            label.col-form-label(for = 'pass') Password:
-            input.form-control(type = 'text', placeholder = '******', name = 'pass')
             br
             .form-inline.my-2.my-lg-0
                 input.btn.btn-outline-success.mr-sm-2(type = 'submit' value = 'Submit')

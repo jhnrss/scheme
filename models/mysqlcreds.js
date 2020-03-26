@@ -1,1 +1,1 @@
-//model for credentials for mysql database
+//model for credentials for presto credentials

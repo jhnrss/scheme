@@ -3,15 +3,13 @@ $(document).ready(function() {
         if($('#projresults').hasClass('invisible')) {
             $('#projresults').removeClass('invisible')
             $('#projresults').addClass('visible')
-            $('#projsearch').removeClass('visible')
-            $('#projsearch').addClass('invisible')
+            $('#searchproj').addClass('disabled')
         }
     })
 
     $('#closeres').on('click', function() {
-        $('#projsearch').removeClass('invisible')
-        $('#projsearch').addClass('visible')
         $('#projresults').removeClass('visible')
         $('#projresults').addClass('invisible')
+        $('#searchproj').removeClass('disabled')
     })
 })

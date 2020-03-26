@@ -4,9 +4,9 @@ services:
         image: gallon1/scheme
         build: .
         ports:
-            -49160:8080
+            - "49160:8080"
         environment:
-            NODE_ENV : docker
+            NODE_ENV: docker
         volumes:
             - .:/usr/src/app
     couchdb:
@@ -14,7 +14,7 @@ services:
         deploy:
             replicas: 1
         ports:
-            -5984:5984
-            -8091:8091
-            -8092:8092
-            -8093:8093
+            - "5984:5984"
+            - "8091:8091"
+            - "8092:8092"
+            - "8093:8093"
