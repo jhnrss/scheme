@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    block scripts
+  body
+    block navbar
+      .navbar.navbar-expand-sm.navbar-dark.bg-dark.justify-content-between
+        .navbar-brand Scheme
+        nav.navbar-nav.justify-content-end
+          li.nav-item
+            a.nav-link(href='/') Projects
+    block content

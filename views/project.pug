@@ -1,0 +1,38 @@
+extends layout
+
+block scripts
+    script(src='/javascripts/jquery/jquery-3.4.1.js')
+    script(src='/javascripts/ui/project.js')
+block content
+    
+    br
+    br
+
+    #proj.container.jumbotron
+        h3= 'Current Projects'
+        #projlist
+        br
+        .form-inline.my-2.my-lg-0    
+            button#createproj.btn.btn-outline-info.mr-sm-2 Create
+            form.form-inline.my-2.my(action = '/query')
+                input.btn.btn-outline-success(type = 'submit' value = 'Use')
+
+    #projform.container.jumbotron.invisible
+        h3= 'Create a Project'
+        h6= 'A Project is a direct mapping of your MySQL Schema'
+        h6= 'Enter Your Database Credentials Below'
+        form.form-group(action = '/create', method = 'post')
+            label.col-form-label(for = 'hostname') Database Host:
+            input.form-control(type = 'text', placeholder = 'http://' name='hostname')
+            label.col-form-label(for = 'database') Database Name:
+            input.form-control(type = 'text', placeholder = 'information_db' name = 'database')
+            label.col-form-label(for = 'port') Database Port:
+            input.form-control(type = 'text', placeholder = '3306', name = 'port')
+            label.col-form-label(for = 'user') User:
+            input.form-control(type = 'text', placeholder = 'root', name = 'user')
+            label.col-form-label(for = 'pass') Password:
+            input.form-control(type = 'text', placeholder = '******', name = 'pass')
+            br
+            .form-inline.my-2.my-lg-0
+                input.btn.btn-outline-success.mr-sm-2(type = 'submit' value = 'Submit')
+                button#closeform.btn.btn-outline-info Close
