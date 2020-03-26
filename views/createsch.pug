@@ -2,28 +2,20 @@ extends layout
 
 block scripts
     script(src='/javascripts/jquery/jquery-3.4.1.js')
-    script(src='/javascripts/ui/project.js')
+    script(src='/javascripts/ui/createschui.js')
 block content
-    
+
     br
     br
 
-    #proj.container.jumbotron
-        h3= 'Current Schemas'
-        h5= 'Select a Schema to Query On'
-        #projlist.container
-        br
-        .form-inline.my-2.my-lg-0    
-            button#createproj.btn.btn-outline-info.mr-sm-2 Create
-            form.form-inline.my-2.my(action = '/query')
-                input.btn.btn-outline-success(type = 'submit' value = 'Use')
-
-    #projform.container.jumbotron.invisible
+    #schemaform.container.jumbotron.visible
         h3= 'Map Your Data Schema'
         h5= 'Enter the Credentials Below for your Presto Cluster'
-        form.form-group(action = '/create', method = 'post')
+        form.form-group(action = '/createsch/create', method = 'post')
             label.col-form-label(for = 'hostname') Cluster Host:
             input.form-control(type = 'text', placeholder = 'http://' name='hostname')
+            label.col-form-label(for = 'port') Cluster Port:
+            input.form-control(type = 'text', placeholder = '8080', name = 'port')
             label.col-form-label(for = 'catalog') Catalog Name:
             input.form-control(type = 'text', placeholder = 'tpch' name = 'catalog')
             label.col-form-label(for = 'schema') Schema Name:
@@ -33,4 +25,3 @@ block content
             br
             .form-inline.my-2.my-lg-0
                 input.btn.btn-outline-success.mr-sm-2(type = 'submit' value = 'Submit')
-                button#closeform.btn.btn-outline-info Close

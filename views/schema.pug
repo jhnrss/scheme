@@ -1,0 +1,42 @@
+extends layout
+
+block scripts
+    script(src='/javascripts/jquery/jquery-3.4.1.js')
+    script(src='/javascripts/ui/schemaui.js')
+block content
+    
+    br
+    br
+
+    #schema.container.jumbotron
+        h3= 'Current Schemas'
+        h5= 'Select a Schema to Query On'
+        #schemalist.container
+        br
+        .form-inline.my-2.my-lg-0    
+            form.form-inline.my-2.my(action = '/createsch')
+                input#createschema.btn.btn-outline-info.mr-sm-2(type = 'submit', value = 'Create')
+            button#useschema.btn.btn-outline-success Use
+
+    br
+
+    #schemasearch.container.invisible
+        h3= 'Build a Query'
+        h6= 'Query on Your Mapped Data'
+        form.form-group(action = '/query', method = 'post')
+            .input-group.mb3
+                input#query.form-control(type = 'text' placeholder = 'select')
+                .input-group-append   
+                    input#searchschema.btn.btn-outline-success(type = 'submit' value = 'Search')
+                    #searchwarn.invalid-feedback.invisible Close results before submitting new query.
+    
+    br
+
+    #schemaresults.container.jumbotron.invisible
+        h3= 'Query Results'
+        #results
+        br
+        .form-inline.my-2.mylg-0
+            button#closeres.btn.btn-outline-info Close
+
+    

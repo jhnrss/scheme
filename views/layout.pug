@@ -8,12 +8,13 @@ html
   body
     block navbar
       .navbar.navbar-expand-sm.navbar-light.bg-light.justify-content-between
-        .navbar-brand Scheme
-          img#logo.ml-2.logoimg(src = '/images/lightbulblogo.svg') 
-        nav.navbar-nav.justify-content-end
-          li.nav-item
-            a.nav-link(href='/') Schemas
-              img#projlogo.ml-2.logoimg(src = '/images/databaselogo.svg')
+        .navbar-brand Scheme, a Small Query Engine
+          img#brandlogo.ml-2.logoimg(src = '/images/lightbulblogo.svg') 
+        nav.navbar-nav.justify-content-between
+            a.nav-item.nav-link.mr-sm-3(href='/') Query
+              img#schemalogo.ml-2.logoimg(src = '/images/magnifylogo.svg')
+            a.nav-item.nav-link(href='/createsch') Connect
+              img#createlogo.ml-2.logoimg(src = '/images/databaselogo.svg')
     block content
 
 

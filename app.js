@@ -6,8 +6,8 @@ var logger = require('morgan')
 
 //location of js scripts for routing purposes
 //var usersRouter = require('./controllers/users')
-var queryRouter = require('./controllers/query')
-var projectRouter = require('./controllers/project')
+var schemaRouter = require('./controllers/schema')
+var createschRouter = require('./controllers/createsch')
 
 var app = express()
 
@@ -24,8 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 //routes
 //app.use('/', indexRouter)
 //app.use('/users', usersRouter)
-app.use('/', projectRouter)
-app.use('/query', queryRouter)
+app.use('/', schemaRouter)
+app.use('/createsch', createschRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
