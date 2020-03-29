@@ -1,5 +1,5 @@
 # LTS version of node
-FROM node:10
+FROM node:12
 
 # app location
 WORKDIR /usr/src/scheme
@@ -15,7 +15,9 @@ RUN npm install
 # bundle app source
 COPY . .
 
-# expose port of app
-EXPOSE 8080
+# expose ports of app
+EXPOSE 8088
+EXPOSE 27017
 
-CMD [ "npm", "start"]
+#start app with node 
+CMD npm start

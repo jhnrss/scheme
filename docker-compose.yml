@@ -1,20 +1,26 @@
 version: "3.7"
 services:
-    scheme:
+    schemeapp:
         image: gallon1/scheme
+        container_name: schemeapp
         build: .
         ports:
-            - "49160:8080"
+            - '49160:8088'
         environment:
             NODE_ENV: docker
         volumes:
             - .:/usr/src/app
-    couchdb:
-        image: couchbase
-        deploy:
-            replicas: 1
+        links: 
+            - schememodels
+    schememodels:
+        image: mongo:latest
+        container_name: schememodels
+        environment:
+            MONGO_INITDB_DATABASE: schememodels
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: password
+        volumes:
+            - ./mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
+            - ./data:/data/db
         ports:
-            - "5984:5984"
-            - "8091:8091"
-            - "8092:8092"
-            - "8093:8093"
+            - '27017:27017'

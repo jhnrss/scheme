@@ -1,3 +1,4 @@
+//necessary libraries
 var createError = require('http-errors')
 var express = require('express')
 var path = require('path')
@@ -6,15 +7,17 @@ var logger = require('morgan')
 
 //location of js scripts for routing purposes
 //var usersRouter = require('./controllers/users')
-var schemaRouter = require('./controllers/schema')
-var createschRouter = require('./controllers/createsch')
+var queryRouter = require('./controllers/query')
+var connectRouter = require('./controllers/connect')
 
+//initialize express
 var app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
+//useful libraries
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -22,10 +25,9 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 //routes
-//app.use('/', indexRouter)
 //app.use('/users', usersRouter)
-app.use('/', schemaRouter)
-app.use('/createsch', createschRouter)
+app.use('/', queryRouter)
+app.use('/connect', connectRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,4 +45,7 @@ app.use(function(err, req, res, next) {
   res.render('error')
 });
 
+//export the module
+//CommonJS semantics (require and module.exports)
+//has a few strange semantics like . or ..
 module.exports = app

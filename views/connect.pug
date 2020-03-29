@@ -2,16 +2,16 @@ extends layout
 
 block scripts
     script(src='/javascripts/jquery/jquery-3.4.1.js')
-    script(src='/javascripts/ui/createschui.js')
+    script(src='/javascripts/ui/connectui.js')
 block content
 
     br
     br
 
-    #schemaform.container.jumbotron.visible
+    #connectform.container.jumbotron
         h3= 'Map Your Data Schema'
         h5= 'Enter the Credentials Below for your Presto Cluster'
-        form.form-group(action = '/createsch/create', method = 'post')
+        form.form-group(action = '/connect/create', method = 'post')
             label.col-form-label(for = 'hostname') Cluster Host:
             input.form-control(type = 'text', placeholder = 'http://' name='hostname')
             label.col-form-label(for = 'port') Cluster Port:
@@ -24,4 +24,4 @@ block content
             input.form-control(type = 'text', placeholder = 'root', name = 'user')
             br
             .form-inline.my-2.my-lg-0
-                input.btn.btn-outline-success.mr-sm-2(type = 'submit' value = 'Submit')
+                input#connectbtn.btn.btn-outline-success.mr-sm-2(type = 'submit' value = 'Submit')
