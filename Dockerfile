@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8088
 
 #start app with node 
-CMD ["npm", "run", "docker"]
+CMD ["npm", "start"]
