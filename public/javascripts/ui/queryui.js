@@ -16,8 +16,22 @@ $(document).ready(function() {
             $('#results').removeClass('invisible')
             $('#results').addClass('visible')
             $('#search').addClass('disabled')
-            $('#querytext').addClass('disabled')
         }
+        
+        let searchdata = {
+            "query": "select * from customer limit 100"
+        }
+        $.ajax({
+            url: 'http://0.0.0.0:8088/query',
+            method: 'POST',
+            data: JSON.stringify(searchdata),
+            contentType: 'application/json',
+            success: function (json) {
+                data = JSON.parse(json)
+                $('#resultstable').html(data)
+            }
+        })
+        
     })
     
     if($('#search').hasClass('disabled')) {

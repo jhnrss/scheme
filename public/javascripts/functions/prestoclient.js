@@ -14,14 +14,14 @@ const cont = {
  *  function for Presto Client REST API, will handle all requests and responses
  *  to a specified Presto Cluster with a specified query string
 */
-const PrestoClient = (prestoinst, query) => {
-    //return data
-    let retdata = {
+const PrestoClient = async (prestoinst, query) => {
+    //  return data
+    let data = {
         columns: [],
         data: []
     }
 
-    //define the url, the host with the port, and http method/headers/query body
+    //  define the url, the host with the port, and http method/headers/query body
     let url = prestoinst.url
     let host = url + ':' + prestoinst.port
     let request = {
@@ -35,14 +35,25 @@ const PrestoClient = (prestoinst, query) => {
         },
         body: query
     }
-
+    console.log('""""""""""""""""""""""""""""""""')
+    console.log('')
+    console.log('Welcome to "javascript-presto-client" version 0.1')
+    console.log('Written by Sir Gallo (yours truly)')
+    console.log('')
+    console.log('Your endpoint is: ' + host + endpoint + ' and your request is: ' + JSON.stringify(request))
+    console.log('')
+    console.log('Making server call...')
+    console.log('')
+    
     try {
-        console.log("endpoint: " + host + endpoint + ", request: " + JSON.stringify(request))
+        //  make initial call to server, with POST method and the query to be evaluated
+        let response = await Response(host + endpoint, request, data)
+        console.log('')
+        console.log('...Query Executed! Returning response now.')
+        console.log('')
+        console.log('""""""""""""""""""""""""""""""""')
+        return response
         
-        //make initial call to server, with POST method and the query to be evaluated
-        let response = Response(host + endpoint, request, retdata)
-        console.log(retdata)
-        return retdata
     } catch (err) {
         return err
     }
@@ -54,25 +65,34 @@ const PrestoClient = (prestoinst, query) => {
  *  if the return object contains the field 'nextUri', then go to that route + the host
  *  return data in fields columns and data
 */
-const Response = (url, request, data) => {
-    let response = Request(url, request)
-        .then((jsonres) => {
-            console.log(jsonres)
-            if(jsonres.hasOwnProperty('error')) {
-                console.log(jsonres.error)
-                return jsonres.error
-            }
+const Response = async (url, request, data) => {
+    let res = await Request(url, request)
+    
+    //  check for errors
+    if(res.hasOwnProperty('error')) {
+        console.log(res.error)
+        return res.error
+    }
 
-            data = UpdateData(jsonres, data)
+    //  add to the data and columns fields for the
+    //  return data that will be handled on the front end
+    //  set up this way to handle returning duplicate columns
+    if(res.hasOwnProperty('columns') && res.hasOwnProperty('data')) {
+        console.log('...I see columns and data...working on it...')
+        data.columns.push(res.columns)
+        data.data.push(res.data)
+    }
+    else if(res.hasOwnProperty('data')) {
+        console.log('...I see just data...working on it...')
+        data.data.push(res.data)
+    }
 
-            if(jsonres.hasOwnProperty('nextUri')) {
-                console.log('...going to next URI at: ' + jsonres.nextUri)
-                return Response(jsonres.nextUri, cont, data)
-            }
-            else {
-                return data
-            }
-        })
+    if(res.hasOwnProperty('nextUri')) {
+        console.log('...going to next URI at: ' + res.nextUri + "...")
+        return Response(res.nextUri, cont, data)
+    }
+    
+    return data
 }
 
 /*
@@ -87,18 +107,6 @@ const Request = async (url, request) => {
     } catch(err) {           
         return err
     }
-}
-
-/*
- *  add to the data and columns fields for the
- *  return data that will be handled on the front end
-*/
-const UpdateData = (response, data) => {
-    if(response.hasOwnProperty('columns'))
-        data.columns.push(response.columns)
-    if(response.hasOwnProperty('data'))
-        data.data.push(response.data)
-    return data
 }
 
 module.exports.PrestoClient = PrestoClient

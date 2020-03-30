@@ -1,8 +1,8 @@
 //route for handling project creation and 
 //project management
-var express = require('express')
-var db = require('mongodb')
-var router = express.Router()
+const express = require('express')
+const db = require('mongodb')
+const router = express.Router()
 
 const prestocli = require('../public/javascripts/functions/prestoclient')
 
@@ -25,13 +25,12 @@ router.post('/query', function(req, res, next) {
     user: 'ec2-user'
   }
 
-  let query = 'select * from customer limit 20'
+  let query = req.body.query
 
-  let result = prestocli.PrestoClient(prestoinst, query)
-  
-  console.log(result)
-  res.json(result)
-
+  prestocli.PrestoClient(prestoinst, query)
+    .then((data) => {
+      res.json(data)
+    })
 })
 
 module.exports = router
