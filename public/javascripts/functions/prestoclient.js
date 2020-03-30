@@ -37,10 +37,9 @@ const PrestoClient = async (prestoinst, query) => {
     }
     console.log('""""""""""""""""""""""""""""""""')
     console.log('')
-    console.log('Welcome to "javascript-presto-client" version 0.1')
-    console.log('Written by Sir Gallo (yours truly)')
+    console.log('Beginning run of "javascript-presto-client", version 0.1')
     console.log('')
-    console.log('Your endpoint is: ' + host + endpoint + ' and your request is: ' + JSON.stringify(request))
+    console.log('Your endpoint is: ' + host + endpoint + ' and your query is: ' + request.body)
     console.log('')
     console.log('Making server call...')
     console.log('')

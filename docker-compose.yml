@@ -3,24 +3,27 @@ services:
     schemeapp:
         image: gallon1/scheme
         container_name: schemeapp
-        build: .
+        build: 
+            context: .
         ports:
             - '49160:8088'
         environment:
-            NODE_ENV: docker
+            - NODE_ENV=docker
         volumes:
-            - .:/usr/src/app
+            - appdata:/usr/src/app
         links: 
-            - schememodels
+            - 'schememodels:mysql'
     schememodels:
-        image: mongo:latest
+        image: mariadb
         container_name: schememodels
         environment:
-            MONGO_INITDB_DATABASE: schememodels
-            MONGO_INITDB_ROOT_USERNAME: admin
-            MONGO_INITDB_ROOT_PASSWORD: password
+            - MYSQL_DATABASE=schememodels
+            - MYSQL_ROOT_PASSWORD=rootscheme
         volumes:
-            - ./mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
-            - ./data:/data/db
+            - ./db/init:/docker-entrypoint-initdb.d:ro
+            - dbdata:/var/lib/mysql
         ports:
-            - '27017:27017'
+            - '3306:3306'
+volumes:
+    dbdata:
+    appdata:

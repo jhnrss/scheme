@@ -18,6 +18,7 @@ $(document).ready(function() {
             $('#search').addClass('disabled')
         }
         
+        /*
         let searchdata = {
             "query": "select * from customer limit 100"
         }
@@ -31,6 +32,7 @@ $(document).ready(function() {
                 $('#resultstable').html(data)
             }
         })
+        */
         
     })
     

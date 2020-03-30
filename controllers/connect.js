@@ -1,10 +1,18 @@
 //page for building queries with a project
-var express = require('express');
-var router = express.Router();
-
+const express = require('express')
+const router = express.Router()
+const mysql = require('mysql')
 //require model for Presto Cluster Credentials
 //let presto = require('../models/presto')
-let prestomodel = require('../public/javascripts/db/dbpresto')
+
+//credentials for mysql database
+const connection = mysql.createConnection({
+  host: 'mysql',
+  port: 3306,
+  user: 'schemeuser',
+  password: 'userscheme',
+  database: 'schememodels'
+})
 
 /* GET query page. */
 router.get('/', function(req, res, next) {
@@ -14,6 +22,7 @@ router.get('/', function(req, res, next) {
 //handle new credentials being input
 router.post('/create', function(req, res, next) {
   
+  //object for presto credentials
   let presto = {
     hostname : req.body.hostname,
     port : req.body.port,
@@ -21,13 +30,34 @@ router.post('/create', function(req, res, next) {
     schema : req.body.schema,
     user : req.body.user
   }
-  
-  let test = prestomodel.testDB()
-  //let newpresto = prestomodel.createPresto(presto)
 
-  //console.log(presto)
-  console.log(presto)
-  //console.log(test)
+  //we need to insert our instance into the database
+  let insert = "insert into `prestocreds` values (" +
+    0 + ", '" +
+    presto.hostname + "', " + 
+    presto.port + ", '" +
+    presto.catalog + "', '" +
+    presto.schema + "', '" +
+    presto.user + "');"
+
+  //connect to mysql database
+  connection.connect(function(err) {
+    if(err) {
+      console.error('error connecting: ' + err.stack)
+      return
+    }
+
+    console.log('connected as id' + connection.threadId)
+  })
+
+  //insert values
+  connection.query(insert, function (err, result) {
+    if(err) throw err
+    console.log('record inserted successfully into database')
+  })
+
+  //end connection
+  connection.end()
   res.redirect('/')
 })
 

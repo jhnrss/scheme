@@ -1,5 +1,5 @@
 # LTS version of node
-FROM node:12
+FROM node:lts
 
 # app location
 WORKDIR /usr/src/scheme
@@ -17,7 +17,6 @@ COPY . .
 
 # expose ports of app
 EXPOSE 8088
-EXPOSE 27017
 
 #start app with node 
-CMD npm start
+CMD ["npm", "run", "docker"]

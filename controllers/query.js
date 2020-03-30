@@ -25,8 +25,16 @@ router.post('/query', function(req, res, next) {
     user: 'ec2-user'
   }
 
-  let query = req.body.query
-
+  //build the query
+  let query = req.body.selecttext 
+  if(req.body.wheretext != null && req.body.wheretext != '')
+    query += ' ' + req.body.wheretext
+  if(req.body.joinstext != null && req.body.joinstext != '')
+    query += ' ' + req.body.joinstext
+  if(req.body.limittext != null && req.body.limittext != '')
+    query += ' ' + req.body.limittext
+  
+  //call the presto client and wait for the response back
   prestocli.PrestoClient(prestoinst, query)
     .then((data) => {
       res.json(data)
