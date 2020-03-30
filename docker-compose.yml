@@ -20,7 +20,7 @@ services:
             - MYSQL_DATABASE=schememodels
             - MYSQL_ROOT_PASSWORD=rootscheme
         volumes:
-            - ./db/init:/docker-entrypoint-initdb.d:ro
+            - ./dbinit:/docker-entrypoint-initdb.d:ro
             - dbdata:/var/lib/mysql
         ports:
             - '3306:3306'
